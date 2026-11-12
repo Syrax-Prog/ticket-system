@@ -1,21 +1,24 @@
 <?php
 
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Ticket;
-use App\Http\Controllers\Api\TicketController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Authentication
+Route::post('/login', [LoginController::class, 'auth']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/tickets', function () {
-    return Ticket::with(['category', 'creator', 'assignee'])
-        ->latest()
-        ->get();
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    // Tickets
+    Route::get('/tickets', [TicketController::class, 'index']);
+
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
-
-Route::get('/tickets', [TicketController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index']);

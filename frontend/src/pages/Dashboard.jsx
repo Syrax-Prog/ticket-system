@@ -7,7 +7,12 @@ function Dashboard() {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/dashboard')
+        fetch('http://localhost:8000/api/dashboard', {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
             .then(response => {
                 if (!response.ok) throw new Error('Failed to fetch dashboard')
                 return response.json()

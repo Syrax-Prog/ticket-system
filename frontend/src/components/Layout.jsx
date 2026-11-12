@@ -1,7 +1,45 @@
 
+import { useNavigate } from 'react-router-dom'
 import './Layout.css'
 
 function Layout({ children }) {
+    const navigate = useNavigate()
+
+    async function handleLogout() {
+        try {
+            const xsrfCookie = document.cookie
+                .split('; ')
+                .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+
+            const xsrfToken = xsrfCookie
+                ? decodeURIComponent(xsrfCookie.split('=').slice(1).join('='))
+                : ''
+
+            const response = await fetch('http://localhost:8000/api/logout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-XSRF-TOKEN': xsrfToken
+                }
+            })
+
+            if (!response.ok) {
+                const data = await response.json()
+                console.log('Status:', response.status)
+                console.log('Response:', data)
+
+                throw new Error(data.message || `HTTP ${response.status}`)
+            }
+
+            navigate('/login')
+
+        } catch (error) {
+            console.error('Logout error:', error)
+            alert(error.message)
+        }
+    }
+
     return (
         <div className="app-layout">
 
@@ -45,10 +83,20 @@ function Layout({ children }) {
 
                 <div className="sidebar-footer">
                     <div className="avatar">A</div>
+
                     <div>
                         <strong>Administrator</strong>
                         <small>Admin Account</small>
                     </div>
+
+                    <button
+                        type="button"
+                        className="icon-button ms-auto"
+                        onClick={handleLogout}
+                        title="Logout"
+                    >
+                        <i className="bi bi-box-arrow-right"></i>
+                    </button>
                 </div>
             </aside>
 
@@ -75,7 +123,6 @@ function Layout({ children }) {
                     </div>
                 </header>
 
-                {/* Page content will be inserted here */}
                 {children}
 
             </main>
