@@ -1,0 +1,165 @@
+/* General */
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    color: #334155;
+}
+
+/* Top Navbar */
+.top-navbar {
+    height: 65px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background: #1e293b;
+    padding: 25px 15px;
+    overflow-y: auto;
+    transition: 0.3s;
+}
+
+.sidebar-heading {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 20px 12px 10px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar-link:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
+.sidebar-link.active {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.sidebar-link i {
+    font-size: 17px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    margin-top: 65px;
+    padding: 30px;
+    min-height: calc(100vh - 65px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+        padding: 20px 10px;
+    }
+
+    .sidebar-heading,
+    .sidebar-link span {
+        display: none;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 12px 5px;
+    }
+
+    .sidebar-link i {
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+        padding: 15px;
+    }
+}
+
+.pagination-laravel .small.text-muted {
+    display: none !important;
+}
+
+
+/* System Login */
+
+.system-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9edf2;
+    font-family: Arial, sans-serif;
+}
+
+.system-login-card {
+    width: 100%;
+    max-width: 380px;
+    background: #ffffff;
+    padding: 35px;
+    border: 1px solid #d5dce5;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.system-login-title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #1e293b;
+    padding-bottom: 22px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #2563eb;
+}
+
+.system-login-card .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.system-login-card .form-control {
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.system-login-card .btn {
+    border-radius: 4px;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
