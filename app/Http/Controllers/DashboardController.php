@@ -79,6 +79,8 @@ class DashboardController extends Controller
             $resolution_rate = round(($resolve_cur_month / $total_ticket) * 100, 2);
         }
 
+        $recent_ticket = Ticket::where('status', 'open')->limit(5)->orderBy('created_at', 'DESC')->get();
+
         $data = array(
             'total_ticket' => $total_ticket,
             'today_date' => now()->format('d F Y'),
@@ -89,7 +91,8 @@ class DashboardController extends Controller
                 'open' => $open_cur_month,
                 'average_time' => $average_time,
                 'rate' => $resolution_rate
-            )
+            ),
+            'recent' => $recent_ticket
         );
 
         return view('dashboard/dashboard', compact('data'));

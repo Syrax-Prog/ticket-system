@@ -59,12 +59,12 @@
 
         <div class="sidebar-heading">Main Menu</div>
 
-        <a href="#" class="sidebar-link">
+        <a href="/dashboard" class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="/tickets" class="sidebar-link active">
+        <a href="/tickets" class="sidebar-link {{ request()->routeIs('ticket.*') ? 'active' : '' }}">
             <i class="bi bi-ticket-perforated"></i>
             <span>All Tickets</span>
         </a>
@@ -77,17 +77,17 @@
 
         <div class="sidebar-heading">Management</div>
 
-        <a href="#" class="sidebar-link">
+        <a href="#" class="sidebar-link {{ request()->routeIs('category.*') ? 'active' : '' }}">
             <i class="bi bi-tags"></i>
             <span>Categories</span>
         </a>
 
-        <a href="#" class="sidebar-link">
+        <a href="#" class="sidebar-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
             <i class="bi bi-people"></i>
             <span>Users</span>
         </a>
 
-        <a href="#" class="sidebar-link">
+        <a href="#" class="sidebar-link {{ request()->routeIs('setting.*') ? 'active' : '' }}">
             <i class="bi bi-gear"></i>
             <span>Settings</span>
         </a>

@@ -13,15 +13,15 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     // Tickets
-    Route::get('/tickets', [TicketController::class, 'index']);
-    Route::get('/tickets/create', [TicketController::class, 'create']);
-    Route::post('/tickets/store', [TicketController::class, 'store']);
+    Route::get('/tickets', [TicketController::class, 'index'])->name('ticket.index');
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
+    Route::post('/tickets/store', [TicketController::class, 'store'])->name('ticket.store');
 
     //Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login/auth', [LoginController::class, 'auth']);
-Route::get('/login/logout', [LoginController::class, 'logout']);
+Route::post('/login/auth', [LoginController::class, 'auth'])->name('login.auth');
+Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');

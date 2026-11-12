@@ -1,52 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    @php
-        $recentTickets = [
-            [
-                'number' => 'HD-20261111-A1B2C3D4',
-                'title' => 'Monitor not displaying',
-                'category' => 'Hardware',
-                'priority' => 'High',
-                'status' => 'Open',
-                'date' => '11 Nov 2026'
-            ],
-            [
-                'number' => 'HD-20261111-E5F6G7H8',
-                'title' => 'Unable to access company email',
-                'category' => 'Account Access',
-                'priority' => 'Urgent',
-                'status' => 'Assigned',
-                'date' => '11 Nov 2026'
-            ],
-            [
-                'number' => 'HD-20261110-I9J0K1L2',
-                'title' => 'Printer connection problem',
-                'category' => 'Hardware',
-                'priority' => 'Medium',
-                'status' => 'In Progress',
-                'date' => '10 Nov 2026'
-            ],
-            [
-                'number' => 'HD-20261110-M3N4O5P6',
-                'title' => 'Software installation request',
-                'category' => 'Software',
-                'priority' => 'Low',
-                'status' => 'Resolved',
-                'date' => '10 Nov 2026'
-            ],
-            [
-                'number' => 'HD-20261109-Q7R8S9T0',
-                'title' => 'Network connection unstable',
-                'category' => 'Network',
-                'priority' => 'High',
-                'status' => 'Closed',
-                'date' => '09 Nov 2026'
-            ],
-        ];
-    @endphp
-
     <div class="container-fluid py-4">
 
         <!-- Dashboard Header -->
@@ -227,50 +181,47 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($recentTickets as $ticket)
+                            @php
+                                $priorityColors = [
+                                    'Low' => 'success',
+                                    'Medium' => 'info',
+                                    'High' => 'warning',
+                                    'Urgent' => 'danger'
+                                ];
 
-                                @php
-                                    $priorityColors = [
-                                        'Low' => 'success',
-                                        'Medium' => 'info',
-                                        'High' => 'warning',
-                                        'Urgent' => 'danger'
-                                    ];
+                                $statusColors = [
+                                    'open' => 'secondary',
+                                    'assigned' => 'info',
+                                    'closed' => 'dark'
+                                ];
+                            @endphp
 
-                                    $statusColors = [
-                                        'Open' => 'secondary',
-                                        'Assigned' => 'info',
-                                        'In Progress' => 'primary',
-                                        'Resolved' => 'success',
-                                        'Closed' => 'dark'
-                                    ];
-                                @endphp
-
+                            @foreach ($data['recent'] as $ticket)
                                 <tr>
                                     <td class="px-4 fw-semibold text-primary">
-                                        {{ $ticket['number'] }}
+                                        {{ $ticket->ticket_number }}
                                     </td>
 
-                                    <td>{{ $ticket['title'] }}</td>
+                                    <td>{{ $ticket->title }}</td>
 
-                                    <td>{{ $ticket['category'] }}</td>
+                                    <td>{{ $ticket->category?->name }}</td>
 
                                     <td>
                                         <span
-                                            class="badge bg-{{ $priorityColors[$ticket['priority']] }}-subtle text-{{ $priorityColors[$ticket['priority']] }}">
-                                            {{ $ticket['priority'] }}
+                                            class="badge bg-{{ $priorityColors[$ticket->priority] }}-subtle text-{{ $priorityColors[$ticket->priority] }}">
+                                            {{ $ticket->priority }}
                                         </span>
                                     </td>
 
                                     <td>
                                         <span
-                                            class="badge bg-{{ $statusColors[$ticket['status']] }}-subtle text-{{ $statusColors[$ticket['status']] }}">
-                                            {{ $ticket['status'] }}
+                                            class="badge bg-{{ $statusColors[$ticket->status] }}-subtle text-{{ $statusColors[$ticket->status] }}">
+                                            {{ $ticket->status }}
                                         </span>
                                     </td>
 
                                     <td class="pe-4 text-muted small">
-                                        {{ $ticket['date'] }}
+                                        {{ $ticket->created_at->format('d F Y') }}
                                     </td>
                                 </tr>
 
