@@ -1,64 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <style>
-        .ticket-container {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-        }
+    <link rel="stylesheet" href="{{ asset('css/ticket.css') }}">
 
-        .ticket-container h1 {
-            color: #1e293b;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        .ticket-table {
-            width: 100%;
-            border-collapse: collapse;
-            white-space: nowrap;
-        }
-
-        .ticket-table th,
-        .ticket-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .ticket-table th {
-            background: #1e293b;
-            color: white;
-            font-weight: 600;
-        }
-
-        .ticket-table td {
-            font-size: 14px;
-            color: #475569;
-        }
-
-        .ticket-table tr:hover {
-            background: #f8fafc;
-        }
-
-        .ticket-status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            background: #e0f2fe;
-            color: #0369a1;
-            font-size: 12px;
-            font-weight: 600;
-        }
-    </style>
+    @include('tickets.search')
 
     <div class="ticket-container">
-        <h1>All Tickets</h1>
+        <h1>{{ in_array($status, array('open', 'closed', 'assigned')) ? ucfirst($status) : 'All' }} Tickets</h1>
 
         <div class="table-wrapper">
             <table class="ticket-table">
@@ -78,27 +25,35 @@
                     <th>Closed At</th>
                 </tr>
 
-                @foreach ($ticket as $row)
+                @if (!$ticket->isEmpty())
+                    @foreach ($ticket as $row)
+                        <tr>
+                            <td>{{ $row->ticket_number }}</td>
+                            <td>{{ $row->title }}</td>
+                            <td>{{ $row->description }}</td>
+                            <td>{{ $row->category?->name ?? '-' }}</td>
+                            <td>{{ $row->priority }}</td>
+                            <td>
+                                <span class="ticket-status">
+                                    {{ $row->status }}
+                                </span>
+                            </td>
+                            <td>{{ $row->creator?->name ?? '-' }}</td>
+                            <td>{{ $row->assignee?->name ?? '-' }}</td>
+                            <td>{{ $row->created_at }}</td>
+                            <td>{{ $row->assigned_at ?? '-' }}</td>
+                            <td>{{ $row->resolved_at ?? '-' }}</td>
+                            <td>{{ $row->resolution_details ?? '-' }}</td>
+                            <td>{{ $row->closed_at ?? '-' }}</td>
+                        </tr>
+                    @endforeach
+                @else
                     <tr>
-                        <td>{{ $row->ticket_number }}</td>
-                        <td>{{ $row->title }}</td>
-                        <td>{{ $row->description }}</td>
-                        <td>{{ $row->category?->name ?? '-' }}</td>
-                        <td>{{ $row->priority }}</td>
-                        <td>
-                            <span class="ticket-status">
-                                {{ $row->status }}
-                            </span>
+                        <td colspan="13" class="text-center py-4 text-muted">
+                            No tickets found.
                         </td>
-                        <td>{{ $row->creator?->name ?? '-' }}</td>
-                        <td>{{ $row->assignee?->name ?? '-' }}</td>
-                        <td>{{ $row->created_at }}</td>
-                        <td>{{ $row->assigned_at ?? '-' }}</td>
-                        <td>{{ $row->resolved_at ?? '-' }}</td>
-                        <td>{{ $row->resolution_details ?? '-' }}</td>
-                        <td>{{ $row->closed_at ?? '-' }}</td>
                     </tr>
-                @endforeach
+                @endif
             </table>
 
             <div class="pagination-laravel">

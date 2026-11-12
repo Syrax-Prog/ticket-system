@@ -1,0 +1,136 @@
+.ticket-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.ticket-container h1 {
+    color: #1e293b;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+.ticket-table th,
+.ticket-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ticket-table th {
+    background: #1e293b;
+    color: white;
+    font-weight: 600;
+}
+
+.ticket-table td {
+    font-size: 14px;
+    color: #475569;
+}
+
+.ticket-table tr:hover {
+    background: #f8fafc;
+}
+
+.ticket-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.ticket-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ticket-search input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+.ticket-search input:focus {
+    border-color: #3b82f6;
+}
+
+.ticket-search button {
+    padding: 10px 20px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.ticket-search a {
+    display: flex;
+    align-items: center;
+    color: #64748b;
+    text-decoration: none;
+}
+
+
+.ticket-search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ticket-search select,
+.ticket-search input {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #fff;
+    outline: none;
+}
+
+.ticket-search select {
+    min-width: 150px;
+}
+
+.ticket-search input {
+    flex: 1;
+    min-width: 180px;
+}
+
+.ticket-search button {
+    padding: 10px 20px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.ticket-search button:hover {
+    background: #334155;
+}
+
+.ticket-search a {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: #64748b;
+    text-decoration: none;
+}

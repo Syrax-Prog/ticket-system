@@ -39,5 +39,11 @@ class TicketService
             return $ticket;
         });
     }
+
+    // public function search($search_field = '', $search_value = '', $search_by = ''){
+    //     if($searh_field == '' || $search_value == '' || $search_by = ''){
+
+    //     }
+    // }
 }
 ?>

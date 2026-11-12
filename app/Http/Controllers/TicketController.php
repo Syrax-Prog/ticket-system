@@ -31,9 +31,16 @@ class TicketController extends Controller
         return redirect('/tickets');
     }
 
-    public function index()
+    public function index(Request $r)
     {
-        $ticket = Ticket::orderByRaw('COALESCE(updated_at, created_at) DESC')->paginate(10);
-        return view('tickets.show', compact('ticket'));
+        $status = in_array($r->query('status'), array('open', 'assigned', 'closed')) ? $r->query('status') : '';
+
+        if (!empty($status)) {
+            $ticket = Ticket::where('status', $status)->orderByRaw('COALESCE(updated_at, created_at) DESC')->paginate(10);
+        } else {
+            $ticket = Ticket::orderByRaw('COALESCE(updated_at, created_at) DESC')->paginate(10);
+        }
+
+        return view('tickets.show', compact('ticket', 'status'));
     }
 }

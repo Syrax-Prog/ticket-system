@@ -64,10 +64,50 @@
             <span>Dashboard</span>
         </a>
 
-        <a href="/tickets" class="sidebar-link {{ request()->routeIs('ticket.*') ? 'active' : '' }}">
-            <i class="bi bi-ticket-perforated"></i>
-            <span>All Tickets</span>
-        </a>
+
+        {{-- All Inbox --}}
+        <div class="sidebar-menu">
+
+            <div class="d-flex align-items-center">
+
+                {{-- Main link: navigates to all inbox --}}
+                <a href="/tickets" class="sidebar-link flex-grow-1 {{ request()->is('tickets*') ? 'active' : '' }}">
+                    <i class="bi bi-inbox"></i>
+                    <span>All Inbox</span>
+                </a>
+
+                {{-- Dropdown toggle --}}
+                <button class="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#inboxSubmenu"
+                    aria-expanded="{{ request()->is('tickets*') ? 'true' : 'false' }}" aria-controls="inboxSubmenu">
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+            </div>
+
+            {{-- Submenu --}}
+            <div class="collapse {{ request()->is('tickets*') ? 'show' : '' }}" id="inboxSubmenu">
+
+                <div class="ms-4">
+
+                    <a href="/tickets?status=open" class="sidebar-link">
+                        <i class="bi bi-circle"></i>
+                        <span>Open</span>
+                    </a>
+
+                    <a href="/tickets?status=assigned" class="sidebar-link">
+                        <i class="bi bi-person-check"></i>
+                        <span>Assigned</span>
+                    </a>
+
+                    <a href="/tickets?status=closed" class="sidebar-link">
+                        <i class="bi bi-check-circle"></i>
+                        <span>Closed</span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
 
         <a href="/tickets/create" class="sidebar-link">
             <i class="bi bi-plus-circle"></i>
